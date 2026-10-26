@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="가족만 모여 드리는 스무 명의 예배. 스몰웨딩 후기 11편을 정리한 준비 앱.">
+<meta name="wedding-standalone" content="1">
+<meta name="theme-color" content="#FAF6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#181215" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="스몰웨딩">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+<title>우리 스몰웨딩 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF6F1;
+    --surface: #FFFFFF;
+    --surface-2: #F3ECE5;
+    --ink: #2B2025;
+    --ink-2: #67585D;
+    --ink-3: #8F7F84;
+    --line: #E7DDD5;
+    --rose: #A63F5A;
+    --rose-ink: #86304A;
+    --rose-soft: #F8E6EA;
+    --sage: #4A7058;
+    --sage-soft: #E3EEE6;
+    --warn: #AE3A27;
+    --warn-soft: #FBE9E4;
+    --gold: #8F6419;
+    --gold-soft: #F6EDDA;
+    --on-accent: #FFFFFF;
+    --focus: #A63F5A;
+    --scrim: rgba(30, 18, 24, .45);
+    --shadow: 0 1px 2px rgba(43,32,37,.06), 0 4px 16px rgba(43,32,37,.06);
+    --display: "Nanum Myeongjo", "AppleMyungjo", serif;
+    --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --gutter: 16px;
+    --tabbar-h: 60px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #181215;
+      --surface: #221A1E;
+      --surface-2: #2C2227;
+      --ink: #F2EAED;
+      --ink-2: #C3B3B9;
+      --ink-3: #998990;
+      --line: #3A2E34;
+      --rose: #E890A6;
+      --rose-ink: #F4B6C5;
+      --rose-soft: #3D222A;
+      --sage: #8FC6A0;
+      --sage-soft: #1D3125;
+      --warn: #F29C8A;
+      --warn-soft: #3C211C;
+      --gold: #E2B86A;
+      --gold-soft: #3A2D16;
+      --on-accent: #1C1317;
+      --focus: #F4B6C5;
+      --scrim: rgba(0, 0, 0, .55);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #181215;
+    --surface: #221A1E;
+    --surface-2: #2C2227;
+    --ink: #F2EAED;
+    --ink-2: #C3B3B9;
+    --ink-3: #998990;
+    --line: #3A2E34;
+    --rose: #E890A6;
+    --rose-ink: #F4B6C5;
+    --rose-soft: #3D222A;
+    --sage: #8FC6A0;
+    --sage-soft: #1D3125;
+    --warn: #F29C8A;
+    --warn-soft: #3C211C;
+    --gold: #E2B86A;
+    --gold-soft: #3A2D16;
+    --on-accent: #1C1317;
+    --focus: #F4B6C5;
+    --scrim: rgba(0, 0, 0, .55);
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 15px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+    word-break: keep-all; overflow-wrap: anywhere;
+  }
+  h1, h2, h3, h4 { margin: 0; line-height: 1.3; text-wrap: balance; }
+  p { margin: 0; }
+  button, input { font: inherit; color: inherit; }
+  a { color: var(--rose); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+
+  /* ---------- app shell ---------- */
+  .app { min-height: 100dvh; padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + 24px); }
+  .topbar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner, .page {
+    max-width: 34rem; margin: 0 auto;
+    padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  }
+  .topbar-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 12px; }
+  .brand { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -.02em; display: inline-flex; align-items: center; gap: 8px; }
+  .brand em { font-style: normal; color: var(--rose); }
+  .brand svg { width: 30px; height: 18px; }
+  .rings circle { fill: none; stroke-width: 2.2; }
+  .rings .r1 { stroke: var(--rose); }
+  .rings .r2 { stroke: var(--gold); }
+  .topbar-meta { font-size: 13px; color: var(--ink-3); text-align: right; }
+  .topbar-meta b { color: var(--ink); font-weight: 600; }
+  .page { padding-block: 20px; }
+  .view { display: flex; flex-direction: column; gap: 28px; }
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    background: var(--surface); border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tabbar ul { display: grid; grid-template-columns: repeat(5, 1fr); max-width: 34rem; margin: 0 auto; padding: 0; list-style: none; }
+  .tabbar a {
+    height: var(--tabbar-h); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    font-size: 12px; font-weight: 500; color: var(--ink-3); text-decoration: none;
+  }
+  .tabbar svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .tabbar a[aria-current="page"] { color: var(--rose); font-weight: 600; }
+
+  /* ---------- shared pieces ---------- */
+  .section { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .section-title { font-size: 18px; font-weight: 700; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--ink-3); }
+  .hint { font-size: 13px; color: var(--ink-3); }
+  .display { font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; line-height: 1.3; }
+  .display em { font-style: normal; color: var(--rose); }
+  .lede { color: var(--ink-2); font-size: 14.5px; }
+  .card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--ink); font-size: 13px; font-weight: 600;
+    cursor: pointer; white-space: nowrap; text-decoration: none;
+  }
+  .btn:hover { border-color: var(--ink-3); }
+  .btn-primary { background: var(--rose); border-color: var(--rose); color: var(--on-accent); }
+  .btn-primary:hover { border-color: var(--rose); filter: brightness(1.05); }
+  .btn-ghost { background: transparent; border-color: transparent; color: var(--ink-2); }
+  .btn-sm { min-height: 30px; padding: 0 10px; font-size: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 4px; min-height: 34px; padding: 0 12px;
+    border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+    font-size: 13px; color: var(--ink-2); cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .chip.static { cursor: default; min-height: 30px; }
+  .chip.static b { color: var(--ink); font-weight: 600; }
+  .chip.todo { background: var(--gold-soft); border-color: transparent; color: var(--gold); }
+  .chip.todo b { color: inherit; }
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tile { padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+  .tile-label { font-size: 12px; color: var(--ink-3); }
+  .tile-value { font-family: var(--mono); font-size: 21px; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .tile-value small { font-family: var(--body); font-size: 12.5px; color: var(--ink-3); font-weight: 500; margin-left: 2px; }
+  .tile-sub { font-size: 12px; color: var(--ink-2); }
+  .tile.rose .tile-value { color: var(--rose); }
+  .tile.gold .tile-value { color: var(--gold); }
+  .banner { background: var(--rose-soft); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+  .banner .lbl { align-self: flex-start; font-size: 12px; font-weight: 600; color: var(--on-accent); background: var(--rose); border-radius: 4px; padding: 1px 7px; }
+  .banner .what { font-size: 16px; font-weight: 600; line-height: 1.45; }
+  .banner .what small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); }
+  .banner .acts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .list { list-style: none; margin: 0; padding: 0; overflow: hidden; }
+  .list > li + li { border-top: 1px solid var(--line); }
+  .list-row {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px;
+    width: 100%; padding: 14px 16px; background: none; border: 0; text-align: left; color: inherit; text-decoration: none;
+  }
+  button.list-row, a.list-row { cursor: pointer; }
+  button.list-row:hover, a.list-row:hover { background: var(--surface-2); }
+  .list-row.two { grid-template-columns: 1fr auto; }
+  .list-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .list-main strong { font-weight: 600; font-size: 15px; }
+  .list-main span { font-size: 13px; color: var(--ink-2); }
+  .list-side { font-size: 13px; color: var(--ink-3); display: flex; align-items: center; gap: 4px; }
+  .list-side svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .rank {
+    width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--rose-soft); color: var(--rose); font-family: var(--mono); font-weight: 600; font-size: 13px;
+  }
+  .tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: var(--surface-2); color: var(--ink-2); border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 500; }
+  .tag b { color: var(--ink); font-weight: 600; }
+  .tag-good { background: var(--sage-soft); color: var(--sage); }
+  .tag-warn { background: var(--warn-soft); color: var(--warn); }
+  .tag-good::before { content: "+ "; }
+  .tag-warn::before { content: "! "; }
+  .tag-good b, .tag-warn b { color: inherit; }
+  .src { display: inline-block; font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--ink-3); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 4px; }
+  .fine { font-size: 12.5px; color: var(--ink-3); }
+  .seg { display: inline-flex; flex-wrap: wrap; background: var(--surface-2); border-radius: 10px; padding: 3px; gap: 2px; }
+  .seg button { border: 0; background: transparent; border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 500; color: var(--ink-2); cursor: pointer; min-height: 34px; }
+  .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+
+  /* ---------- home ---------- */
+  .hero { display: flex; flex-direction: column; gap: 10px; }
+
+  /* ---------- plan ---------- */
+  .progress { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .progress .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .progress .count { font-family: var(--mono); font-size: 20px; font-weight: 600; }
+  .progress .count small { font-family: var(--body); font-size: 13px; color: var(--ink-3); font-weight: 500; }
+  .pbar { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+  .pbar i { display: block; height: 100%; width: 0; background: var(--sage); border-radius: 4px; transition: width .25s; }
+  .sync { font-size: 12px; color: var(--ink-3); }
+  .phase { padding: 14px 16px 6px; }
+  .phase.now { box-shadow: inset 0 0 0 1.5px var(--rose), var(--shadow); }
+  .phase-head { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; }
+  .phase-head h3 { font-size: 16px; font-weight: 700; }
+  .phase-head .when { display: block; font-family: var(--mono); font-size: 12px; color: var(--ink-3); font-weight: 500; }
+  .phase-head .c { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .phase.done .rank { background: var(--sage); color: var(--on-accent); }
+  .phase.done .phase-head .c { color: var(--sage); font-weight: 600; }
+  .phase .lead { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
+  .checks { list-style: none; margin: 8px 0 0; padding: 0; }
+  .checks li { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; }
+  .checks label { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 11px 0; cursor: pointer; align-items: start; }
+  .checks input { width: 19px; height: 19px; margin: 2px 0 0; accent-color: var(--sage); cursor: pointer; }
+  .checks .tx { font-size: 14.5px; line-height: 1.45; }
+  .checks .tx small { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 1px; }
+  .checks input:checked + .tx { color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--ink-3); }
+  .phase-foot { border-top: 1px solid var(--line); padding: 8px 0 4px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .warnbtn { color: var(--warn); }
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 8px; font-size: 12.5px; }
+  .flow span { background: var(--surface-2); border-radius: 6px; padding: 2px 8px; }
+  .flow span.k { background: var(--rose-soft); color: var(--rose-ink); font-weight: 600; }
+  .flow i { font-style: normal; color: var(--ink-3); }
+  .gate { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px; padding: 4px 4px; }
+  .gate .dia { width: 18px; height: 18px; margin: 0 5px; border: 2px solid var(--rose); background: var(--rose-soft); transform: rotate(45deg); border-radius: 3px; }
+  .gate.done .dia { background: var(--rose); }
+  .gate label { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--rose-ink); cursor: pointer; }
+  .gate input { width: 19px; height: 19px; accent-color: var(--rose); margin: 0; }
+  .gate span { display: block; font-size: 12.5px; color: var(--ink-2); }
+
+  /* ---------- venue ---------- */
+  .pick { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .pick.best { box-shadow: inset 0 0 0 1.5px var(--rose), var(--shadow); }
+  .pick-head { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 12px; }
+  .pick-head h3 { font-size: 17px; font-weight: 700; }
+  .pick-head .meta { font-size: 13px; color: var(--ink-3); }
+  .badge { display: inline-block; vertical-align: 2px; margin-left: 6px; background: var(--rose); color: var(--on-accent); border-radius: 999px; padding: 1px 8px; font-size: 11px; font-weight: 600; }
+  .cap { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--rose-ink); background: var(--rose-soft); border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
+  .pick .btn { align-self: flex-start; }
+  .small-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 13px; color: var(--ink-2); }
+  .small-row .x { font-size: 12.5px; padding: 3px 10px; border-radius: 999px; border: 1px dashed var(--line); color: var(--ink-3); }
+  .small-row .x b { color: var(--ink-2); font-weight: 600; }
+  .alt { border: 1px dashed var(--ink-3); border-radius: var(--radius); padding: 14px 16px; font-size: 13.5px; color: var(--ink-2); }
+  .alt b { display: block; color: var(--ink); font-size: 14.5px; margin-bottom: 2px; }
+
+  /* ---------- worship ---------- */
+  .controls { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
+  .roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .role { padding: 12px 14px; border-radius: var(--radius); }
+  .role.p1 { background: var(--rose-soft); }
+  .role.p2 { background: var(--gold-soft); }
+  .role .who { font-weight: 700; font-size: 14px; }
+  .role.p1 .who { color: var(--rose-ink); }
+  .role.p2 .who { color: var(--gold); }
+  .role .lst { font-size: 13px; margin-top: 2px; }
+  .tl-card { padding: 18px 16px 14px; }
+  .tl { list-style: none; margin: 0; padding: 0; }
+  .tl > li { display: grid; grid-template-columns: 44px 1fr; column-gap: 10px; }
+  .tl .t { font-family: var(--mono); font-size: 12px; color: var(--ink-3); padding-top: 4px; text-align: right; font-variant-numeric: tabular-nums; }
+  .tl .body { position: relative; padding-left: 22px; padding-bottom: 16px; border-left: 2px solid var(--line); }
+  .tl > li:last-child .body { padding-bottom: 2px; border-left-style: dashed; }
+  .tl .n {
+    position: absolute; left: -13px; top: 0; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--rose); color: var(--on-accent); font-family: var(--mono); font-size: 11.5px; font-weight: 600;
+    display: grid; place-items: center; box-shadow: 0 0 0 3px var(--surface);
+  }
+  .tl li.opt .n { background: var(--surface); color: var(--ink-3); border: 1.5px dashed var(--ink-3); }
+  .tl h4 { font-size: 15px; font-weight: 600; line-height: 1.5; }
+  .tl h4 .dur { font-family: var(--mono); font-size: 11.5px; font-weight: 500; color: var(--ink-3); margin-left: 6px; }
+  .tl p { font-size: 13px; color: var(--ink-2); margin-top: 1px; }
+  .whos { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .w { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 1px 9px; background: var(--surface-2); color: var(--ink-2); }
+  .w.p1 { background: var(--rose-soft); color: var(--rose-ink); }
+  .w.p2 { background: var(--gold-soft); color: var(--gold); }
+  .w.couple { background: var(--sage-soft); color: var(--sage); }
+  .note { padding: 12px 14px; border-left: 3px solid var(--rose); background: var(--rose-soft); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13.5px; }
+  .note b { color: var(--rose-ink); }
+
+  /* ---------- budget ---------- */
+  .bctl { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .bctl .row { display: flex; flex-direction: column; gap: 6px; }
+  .bctl .lab { font-size: 13px; font-weight: 600; color: var(--ink-2); display: flex; justify-content: space-between; }
+  .bctl output { font-family: var(--mono); font-weight: 600; color: var(--ink); }
+  .bctl input[type="range"] { width: 100%; accent-color: var(--rose); margin: 4px 0; }
+  .total { padding: 16px; display: flex; flex-direction: column; gap: 2px; }
+  .total .big { font-family: var(--mono); font-size: 28px; font-weight: 600; color: var(--rose); line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .total .per { font-size: 13px; color: var(--ink-2); }
+  .brows { padding: 6px 16px 10px; }
+  .brow { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .brow:last-child { border-bottom: 0; }
+  .brow .nm { font-size: 14px; font-weight: 600; }
+  .brow .nm small { display: block; font-weight: 400; font-size: 12px; color: var(--ink-3); }
+  .brow .val { font-family: var(--mono); font-size: 13.5px; font-weight: 500; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .brow .val small { display: block; font-size: 11.5px; color: var(--ink-3); font-weight: 400; }
+  .bar { grid-column: 1 / -1; position: relative; height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; margin-top: 4px; }
+  .bar .lo, .bar .hi { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 4px; }
+  .bar .hi { background: color-mix(in srgb, var(--rose) 30%, transparent); }
+  .bar .lo { background: var(--rose); }
+  .cases .bar .lo { background: var(--ink-3); }
+  .cases .brow.hl .bar .lo { background: var(--rose); }
+  .cases .brow.hl .val { color: var(--rose); font-weight: 600; }
+  .est { font-size: 11px; font-weight: 600; color: var(--gold); background: var(--gold-soft); border-radius: 4px; padding: 0 6px; margin-left: 6px; vertical-align: 1px; }
+  .legend { display: flex; gap: 14px; font-size: 12px; color: var(--ink-2); padding: 0 16px 14px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 8px; border-radius: 3px; display: inline-block; }
+  .legend i.lo { background: var(--rose); }
+  .legend i.hi { background: color-mix(in srgb, var(--rose) 30%, transparent); }
+
+  /* ---------- sheet + toast ---------- */
+  .sheet-backdrop { position: fixed; inset: 0; z-index: 40; background: var(--scrim); display: flex; align-items: flex-end; justify-content: center; }
+  .sheet {
+    width: 100%; max-width: 34rem; max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 24px);
+    background: var(--bg); border-radius: 20px 20px 0 0; box-shadow: var(--shadow); display: flex; flex-direction: column;
+  }
+  .sheet:focus { outline: none; }
+  .sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px var(--gutter) 12px; border-bottom: 1px solid var(--line); }
+  .sheet-head h2 { font-size: 18px; font-weight: 700; }
+  .sheet-body { padding: 16px var(--gutter) calc(20px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 12px; overflow-y: auto; }
+  .sheet-body h3.grp { font-size: 14px; font-weight: 700; color: var(--ink-2); margin-top: 6px; display: flex; gap: 8px; align-items: baseline; }
+  .sheet-body h3.grp span { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--ink-3); }
+  @media (prefers-reduced-motion: no-preference) {
+    .sheet { animation: sheet-in .18s ease-out; }
+    @keyframes sheet-in { from { opacity: .6; transform: translateY(24px); } }
+  }
+  @media (min-width: 40rem) {
+    .sheet-backdrop { align-items: center; }
+    .sheet { border-radius: 20px; }
+  }
+  .toast {
+    position: fixed; left: 50%; transform: translateX(-50%); z-index: 50;
+    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + 16px);
+    max-width: calc(100% - 2 * var(--gutter)); background: var(--ink); color: var(--bg);
+    font-size: 13px; border-radius: 999px; padding: 10px 16px; box-shadow: var(--shadow);
+  }
+
+  .tip, .caut, .pc-item, .rev { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .tip .th { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .tip h4 { font-size: 16px; font-weight: 700; }
+  .tip .cat { font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+  .tip .k { font-size: 12px; color: var(--ink-3); }
+  .tip .ours { font-size: 13.5px; background: var(--rose-soft); border-radius: var(--radius-sm); padding: 9px 11px; }
+  .tip .ours b { color: var(--rose-ink); margin-right: 4px; }
+  .caut { border-left: 3px solid var(--warn); }
+  .caut b, .pc-item b { font-size: 15px; font-weight: 700; }
+  .caut p, .pc-item p { font-size: 13.5px; color: var(--ink-2); }
+  .caut q { font-family: var(--display); font-weight: 700; font-size: 14.5px; color: var(--warn); quotes: "“" "”"; }
+  .pc-item.good { border-left: 3px solid var(--sage); }
+  .pc-item.bad { border-left: 3px solid var(--warn); }
+  .pc-item .fix { font-size: 13px; background: var(--surface-2); border-radius: 6px; padding: 5px 9px; }
+  .pc-item .fix i { font-style: normal; font-weight: 600; color: var(--sage); margin-right: 4px; }
+  .rev .top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .rev .who { font-weight: 700; font-size: 15px; }
+  .rev .g { font-family: var(--mono); font-size: 18px; font-weight: 600; white-space: nowrap; }
+  .rev .g small { font-family: var(--body); font-size: 12px; color: var(--ink-3); font-weight: 400; }
+  .rev .pl { font-size: 13.5px; }
+  .rev .fm { font-size: 12.5px; color: var(--ink-2); }
+  .rev.best { box-shadow: inset 0 0 0 1.5px var(--rose), var(--shadow); }
+  .gbar { position: relative; height: 6px; background: var(--surface-2); border-radius: 3px; }
+  .gbar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink-3); border-radius: 3px; }
+  .rev.best .gbar i { background: var(--rose); }
+  .gbar u { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--rose); left: calc(20 / 30 * 100%); }
+  .steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <span class="brand"><svg class="rings" viewBox="0 0 30 18" aria-hidden="true"><circle class="r1" cx="11" cy="9" r="7"/><circle class="r2" cx="19" cy="9" r="7"/></svg>우리 <em>스몰웨딩</em></span>
+      <span class="topbar-meta" id="meta">준비 <b class="num">0/0</b></span>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- 홈 -->
+    <div class="view" data-view="home">
+      <div class="hero">
+        <span class="eyebrow">용진 · 민주</span>
+        <h1 class="display">가족만 모여 드리는<br><em>스무 명의 예배</em></h1>
+        <p class="lede">스몰웨딩 후기 11편을 읽고 우리 결혼식에 맞춰 정리한 앱이에요.</p>
+        <div class="chips">
+          <span class="chip static"><b>20명</b> 이하</span>
+          <span class="chip static"><b>직계가족</b>만</span>
+          <span class="chip static">목사님 <b>두 분</b></span>
+          <span class="chip static"><b>예배</b>식</span>
+          <span class="chip static todo"><b>미정</b> 날짜 · 지역 · 예산</span>
+        </div>
+      </div>
+
+      <div class="banner" id="nextCard">
+        <span class="lbl">지금 할 일</span>
+        <div class="what" id="nextWhat"></div>
+        <div class="acts">
+          <button type="button" class="btn btn-primary" id="nextDone">완료로 체크</button>
+          <a class="btn" href="#plan">준비 목록 보기</a>
+        </div>
+      </div>
+
+      <div class="tiles">
+        <div class="card tile rose"><span class="tile-label">예산 · 한정식·돌잔치 공간</span><span class="tile-value">180~520<small>만원</small></span><span class="tile-sub">20명, 반지·웨딩촬영 제외</span></div>
+        <div class="card tile gold"><span class="tile-label">예산 · 호텔 룸</span><span class="tile-value">440~1,150<small>만원</small></span><span class="tile-sub">1인 식대 18.5만원부터</span></div>
+        <div class="card tile"><span class="tile-label">대관 시간</span><span class="tile-value">3~4<small>시간</small></span><span class="tile-sub">예배 45분 + 식사 + 사진</span></div>
+        <div class="card tile"><span class="tile-label">준비 기간</span><span class="tile-value">1~3<small>개월</small></span><span class="tile-sub">장소를 계약한 뒤부터</span></div>
+      </div>
+
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">먼저 알아 둘 다섯 가지</h2></div>
+        <ul class="card list" id="keys"></ul>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">더 알아보기</h2><span class="hint">후기에서 모은 내용</span></div>
+        <ul class="card list">
+          <li><button type="button" class="list-row two" data-sheet="tips"><span class="list-main"><strong>항목별로 고를 것</strong><span>장소, 식사, 사진, 꽃, 의상 등 13가지</span></span><span class="list-side">13<svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></button></li>
+          <li><button type="button" class="list-row two" data-sheet="cautions"><span class="list-main"><strong>후기 속 실수에서 배우기</strong><span>계약 전, 준비하면서, 당일</span></span><span class="list-side">12<svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></button></li>
+          <li><button type="button" class="list-row two" data-sheet="pc"><span class="list-main"><strong>좋았던 점과 힘들었던 점</strong><span>힘들었던 점마다 우리 대비까지</span></span><span class="list-side">14<svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></button></li>
+          <li><button type="button" class="list-row two" data-sheet="sources"><span class="list-main"><strong>참고한 후기</strong><span>9명부터 130명까지, 블로그 원문 링크</span></span><span class="list-side">10<svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></button></li>
+          <li><button type="button" class="list-row two" data-sheet="install"><span class="list-main"><strong>폰 홈 화면에 추가하기</strong><span>앱처럼 아이콘으로 바로 열기</span></span><span class="list-side"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></button></li>
+        </ul>
+      </section>
+      <p class="fine">가격은 후기 작성 당시 기준이고, 예산 범위와 예배 순서는 후기를 바탕으로 한 제 추정과 제안이에요. 2026년 10월 26일 정리.</p>
+    </div>
+
+    <!-- 준비 -->
+    <div class="view" data-view="plan" hidden>
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">준비 체크리스트</h2><span class="hint">장소 계약이 기준점</span></div>
+        <p class="lede">날짜가 아직 없어서 D-6개월로 넉넉히 잡았어요. 장소를 계약하면 나머지는 1~3개월이면 돼요.</p>
+        <div class="card progress">
+          <div class="row"><span class="count" id="pcount"></span><span class="hint" id="pnext"></span></div>
+          <div class="pbar"><i id="pbar"></i></div>
+          <span class="sync" id="sync">저장 공간에 연결하는 중이에요.</span>
+        </div>
+        <div id="phases" class="view" style="gap:12px"></div>
+      </section>
+    </div>
+
+    <!-- 장소 -->
+    <div class="view" data-view="venue" hidden>
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">20명이 들어가는 장소</h2><span class="hint">후기 속 4곳</span></div>
+        <p class="lede">20명 안팎에서는 인원보다 장소 유형이 총액을 정했어요. 가격은 후기 작성 당시 기준이에요.</p>
+        <div id="venues" class="view" style="gap:12px"></div>
+        <div class="small-row">
+          <span>우리에게 작은 곳</span>
+          <span class="x"><b>워커힐 금룡</b> 최대 14명</span>
+          <span class="x"><b>더 마고 그릴</b> 8~12명</span>
+          <span class="x"><b>신라 라연</b> 10명</span>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">상담 때 꼭 물어볼 것</h2><span class="hint">예배식이라서</span></div>
+        <ul class="card list">
+          <li class="list-row two"><span class="list-main"><strong>앞자리와 마이크</strong><span>목사님이 설 자리와 마이크가 있나요?</span></span></li>
+          <li class="list-row two"><span class="list-main"><strong>찬송 반주</strong><span>피아노, 키보드, 음원 재생 중 무엇이 되나요?</span></span></li>
+          <li class="list-row two"><span class="list-main"><strong>가사 스크린</strong><span>찬송 가사를 띄울 화면이 있나요? 롯데 무궁화에는 스크린 있는 방이 있어요.</span></span></li>
+          <li class="list-row two"><span class="list-main"><strong>대관 시간</strong><span>예배 약 45분, 식사 1.5시간, 사진까지 들어가나요?</span></span></li>
+          <li class="list-row two"><span class="list-main"><strong>필수 업체와 추가 요금</strong><span>꽃·스냅 지정 업체, 최소 결제액, 현장 추가 요금이 있나요?</span></span></li>
+        </ul>
+        <div class="alt"><b>다른 선택지</b>교회 소예배실에서 예배하고 근처 식당 룸으로 옮기기. 반주와 분위기는 확실하지만 이동이 생겨요.</div>
+      </section>
+    </div>
+
+    <!-- 예배 -->
+    <div class="view" data-view="worship" hidden>
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">예배 순서</h2><span class="hint">약 45분 · 제안</span></div>
+        <p class="lede">예배식 후기는 미사의정원 하나뿐이라, 여러 후기의 요소를 모아 만든 제안이에요. 목사님 두 분과 상의해 확정하면 돼요.</p>
+        <div class="controls">
+          <div class="seg" role="group" aria-label="역할 분담 방식">
+            <button type="button" data-plan="A" aria-pressed="true">A 나눠서 인도</button>
+            <button type="button" data-plan="B" aria-pressed="false">B 한 분이 주례</button>
+          </div>
+          <button type="button" class="btn btn-sm" id="swap">두 분 바꾸기</button>
+        </div>
+        <p class="hint" id="planDesc"></p>
+        <div class="roles">
+          <div class="role p1"><div class="who" id="p1name"></div><div class="lst" id="p1list"></div></div>
+          <div class="role p2"><div class="who" id="p2name"></div><div class="lst" id="p2list"></div></div>
+        </div>
+        <div class="card tl-card"><ol class="tl" id="steps"></ol></div>
+        <div class="note"><b>먼저 이야기할 것</b> 어느 분이 말씀과 성혼 선포를 맡을지는 양가 부모님과 먼저 이야기하세요. 감사 인사(사례) 방식도 미리 정해 두면 편해요. 장소에는 "예배 50분"으로 알려 두세요.</div>
+      </section>
+    </div>
+
+    <!-- 예산 -->
+    <div class="view" data-view="budget" hidden>
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">예산 계산</h2><span class="hint">반지·웨딩촬영 제외</span></div>
+        <div class="card bctl">
+          <div class="row"><span class="lab">장소 유형</span>
+            <div class="seg" role="group" aria-label="장소 유형">
+              <button type="button" data-venue="han" aria-pressed="true">한정식·돌잔치 공간</button>
+              <button type="button" data-venue="hotel" aria-pressed="false">호텔 룸</button>
+            </div>
+          </div>
+          <div class="row"><label class="lab" for="guests">인원 <output id="guestsOut" for="guests">20명</output></label>
+            <input type="range" id="guests" min="10" max="24" step="1" value="20">
+          </div>
+          <div class="row"><span class="lab">꽃</span>
+            <div class="seg" role="group" aria-label="꽃">
+              <button type="button" data-flower="basic" aria-pressed="true">장소 기본·업체</button>
+              <button type="button" data-flower="pack" aria-pressed="false">필수 패키지</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="total"><span class="tile-label">예상 총액</span><span class="big" id="total"></span><span class="per" id="per"></span></div>
+          <div class="brows" id="brows"></div>
+          <div class="legend"><span><i class="lo"></i>최소</span><span><i class="hi"></i>최대까지</span></div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">후기에 적힌 실제 총액</h2><span class="hint">9~24명</span></div>
+        <div class="card brows cases" id="cases"></div>
+        <div class="chips">
+          <span class="chip static">50명 카페 <b>약 415만</b> + 현장 추가</span>
+          <span class="chip static">80명 펍 파티 <b>1,600만~1,700만</b></span>
+          <span class="chip static">130명 레스토랑 <b>약 1,600만</b></span>
+        </div>
+        <p class="fine">터치더스카이는 대관, 꽃, 스냅, 식대 9인분을 더한 제 추정이고, 워커힐 금룡은 예복 180만원이 들어간 작성자 추정이에요. 80명 파티는 스드메와 신혼여행 포함, 130명은 디렉팅, 꽃, 식대만이에요. 목사님 감사 인사는 양가와 상의할 부분이라 합계에서 뺐어요.</p>
+      </section>
+    </div>
+  </main>
+
+  <nav class="tabbar" aria-label="메뉴"><ul id="tabs"></ul></nav>
+
+  <div class="sheet-backdrop" id="sheetBg" hidden>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" tabindex="-1" id="sheet">
+      <div class="sheet-head"><h2 id="sheetTitle"></h2><button type="button" class="btn btn-ghost btn-sm" id="sheetClose">닫기</button></div>
+      <div class="sheet-body" id="sheetBody"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+</div>
+
+<script>
+(() => {
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const won = n => Math.round(n).toLocaleString('ko-KR');
+  const SRC = { midori: '쀼또리', yje: 'yje1019', vivi: 'viviolaa', chomoong: 'chomoong_319', xuang: '슈앙', giyu: 'onlygiyu', cheomjee: 'cheomjee', gomjubu: '곰주부', koreapas: '고파스', ulming: 'dailyulming' };
+  const srcs = ids => ids && ids.length ? `<div class="srcs">${ids.map(i => `<span class="src">${esc(SRC[i])}</span>`).join('')}</div>` : '';
+  const chev = '<svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>';
+  const STANDALONE = !!document.querySelector('meta[name="wedding-standalone"]');
+
+  /* ---------- tabs ---------- */
+  const TABS = [
+    { id: 'home', label: '홈', d: 'M4 11 12 4l8 7 M6 9.5V20h12V9.5 M10 20v-5h4v5' },
+    { id: 'plan', label: '준비', d: 'M10 6h10 M10 12h10 M10 18h10 M4 6l1.3 1.3L7.5 5 M4 12l1.3 1.3 2.2-2.3 M4 18l1.3 1.3 2.2-2.3' },
+    { id: 'venue', label: '장소', d: 'M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z' },
+    { id: 'worship', label: '예배', d: 'M12 3v18 M6.5 8.5h11' },
+    { id: 'budget', label: '예산', d: 'M3.5 7.5h15a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z M3.5 7.5 15 4.5v3 M16.5 14h.01' },
+  ];
+  $('#tabs').innerHTML = TABS.map(t => `<li><a href="#${t.id}" data-tab="${t.id}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${t.d}"/></svg>${t.label}</a></li>`).join('');
+  const currentTab = () => { const h = location.hash.replace(/^#\/?/, ''); return TABS.some(t => t.id === h) ? h : 'home'; };
+  function showTab() {
+    const id = currentTab();
+    $$('[data-view]').forEach(v => { v.hidden = v.dataset.view !== id; });
+    $$('[data-tab]').forEach(a => a.toggleAttribute('aria-current', false));
+    const a = $(`[data-tab="${id}"]`); if (a) a.setAttribute('aria-current', 'page');
+  }
+  window.addEventListener('hashchange', () => { showTab(); window.scrollTo(0, 0); });
+  showTab();
+
+  let toastTimer = 0;
+  function toast(msg) {
+    const t = $('#toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2000);
+  }
+
+  /* ---------- content ---------- */
+  const KEYS = [
+    ['예배 시간을 먼저 정해 장소에 알리기', '연계 사회자가 30분만 잡아 예배를 줄인 사례가 있어요. 대관은 3~4시간.'],
+    ['사회는 목사님이나 신랑신부가', '장소 연계 사회자는 예배 흐름을 몰라요.'],
+    ['20명이 들어가는 단독 공간 고르기', '후기 속 네 곳이 맞고, 14명 이하 룸은 작아요.'],
+    ['순서지 만들기', '찬송 가사, 성경 본문, 혼인서약, 성혼선언문을 넣어요.'],
+    ['꽃은 업체에, 일손은 사람에게', '셀프 생화는 비추천, 헬퍼 없이 하면 사진이 아쉬워요.'],
+  ];
+  const KEY_GO = ['worship', 'worship', 'venue', 'worship', 'plan'];
+  $('#keys').innerHTML = KEYS.map(([t, d], i) => `<li><a class="list-row" href="#${KEY_GO[i]}"><span class="rank">${i + 1}</span><span class="list-main"><strong>${esc(t)}</strong><span>${esc(d)}</span></span><span class="list-side">${chev}</span></a></li>`).join('');
+
+  const VENUES = [
+    { name: '미사의정원', where: '하남 · 돌잔치 공간', cap: '약 20명', best: true, tags: [['good', '<b>목사님 주례로 예배</b>한 사례'], ['', '뷔페'], ['', '꽃 옵션 <b>20만원</b>'], ['', '1부는 일찍 예약'], ['warn', '연계 사회자는 30분만 잡음']], url: 'https://blog.naver.com/onlygiyu/224444922910', by: 'onlygiyu' },
+    { name: '로움한정식', where: '용인 기흥 · 한정식집 단독룸', cap: '최대 30명', tags: [['good', '<b>24명 총 240만원</b>, 후기 중 가장 저렴'], ['', '2층 단독룸'], ['good', '식사비 외 추가 비용 없음']], url: 'https://blog.naver.com/cheomjee/224191414219', by: 'cheomjee' },
+    { name: '롯데호텔 무궁화', where: '서울 중구 · 호텔 한식당', cap: '20~30명 방', tags: [['', '한식 코스 1인 <b>19만~35만원</b>'], ['good', '스크린 있는 방'], ['good', '무료 주차'], ['warn', '3개월 전 오후 3시 이후 전화 예약']], url: 'https://blog.naver.com/chomoong_319/224449293886', by: 'chomoong_319' },
+    { name: '63 터치더스카이 아폴로룸', where: '서울 영등포 · 고층 레스토랑 룸', cap: '보증 15~30명', tags: [['', '대관 <b>50만원</b>'], ['good', '지배인이 진행 도움'], ['good', '순서지 출력 도움'], ['warn', '꽃 패키지 190만원 필수'], ['warn', '꽃·스냅은 지정 업체만']], url: 'https://blog.naver.com/midori_p/223466104421', by: '쀼또리, 2023년 11월' },
+  ];
+  $('#venues').innerHTML = VENUES.map(v => `<article class="card pick${v.best ? ' best' : ''}">
+      <div class="pick-head"><div><h3>${esc(v.name)}${v.best ? '<span class="badge">예배식 사례</span>' : ''}</h3><div class="meta">${esc(v.where)}</div></div><span class="cap">${esc(v.cap)}</span></div>
+      <ul class="tags">${v.tags.map(([k, h]) => `<li class="tag${k ? ' tag-' + k : ''}">${h}</li>`).join('')}</ul>
+      <a class="btn btn-sm" href="${v.url}" target="_blank" rel="noopener">후기 보기 (${esc(v.by)})</a></article>`).join('');
+
+  /* ---------- worship ---------- */
+  const STEPS = [
+    { name: '꽃꽂이 또는 화촉', opt: true, m: 3, d: '양가 어머니가 함께 꽃을 꽂거나 초를 켜요. viviolaa의 꽃꽂이 세레모니에서 가져왔어요.', who: { A: ['moms'], B: ['moms'] } },
+    { name: '개식과 신랑신부 입장', role: '개식', m: 2, who: { A: ['p2', 'couple'], B: ['p1', 'couple'] } },
+    { name: '찬송', role: '찬송 인도', m: 4, d: '다 함께 불러요. 가사는 순서지에 넣어요.', who: { A: ['p2', 'all'], B: ['p1', 'all'] } },
+    { name: '기도', role: '기도', m: 3, who: { A: ['p2'], B: ['p1'] } },
+    { name: '성경 봉독과 말씀', role: '말씀', m: 12, who: { A: ['p1'], B: ['p1'] } },
+    { name: '혼인서약', role: '혼인서약 진행', m: 4, d: '신랑신부가 직접 쓴 서약을 읽어요.', who: { A: ['p1', 'couple'], B: ['p1', 'couple'] } },
+    { name: '반지 교환', m: 2, who: { A: ['couple'], B: ['couple'] } },
+    { name: '성혼 선포', role: '성혼 선포', m: 3, d: '성혼선언문을 가족이 함께 읽는 방식도 있어요(viviolaa).', who: { A: ['p1'], B: ['p1'] } },
+    { name: '축가', m: 4, d: '신랑신부가 직접 불러 감동이 컸다는 사례가 있어요(onlygiyu).', who: { A: ['couple'], B: ['couple'] } },
+    { name: '덕담과 인사', m: 6, d: '양가 부모님 덕담, 신랑신부 인사.', who: { A: ['parents', 'couple'], B: ['parents', 'couple'] } },
+    { name: '축도', role: '축도', m: 2, who: { A: ['p2'], B: ['p2'] } },
+    { name: '단체사진과 식사 기도', role: '식사 기도', m: 0, d: '가족 조합별로 사진을 찍고, 식사 기도 후 함께 식사해요.', who: { A: ['p1', 'all'], B: ['p2', 'all'] } },
+  ];
+  const PLAN_DESC = {
+    A: '두 분이 반씩 맡아요. 한 분은 말씀과 성혼 선포를, 다른 한 분은 앞부분 인도와 기도, 축도를 맡아요.',
+    B: '한 분이 예배 전체를 인도하고, 다른 한 분은 축도와 식사 기도를 맡아요.',
+  };
+  let plan = 'A', swapped = false;
+  const pName = p => (p === 'p1') !== swapped ? '신랑 측 목사님' : '신부 측 목사님';
+  const WHO = { couple: '신랑신부', all: '다 함께', parents: '양가 부모님', moms: '양가 어머니' };
+  function renderWorship() {
+    $$('[data-plan]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.plan === plan)));
+    $('#planDesc').textContent = PLAN_DESC[plan];
+    let t = 0;
+    $('#steps').innerHTML = STEPS.map((s, i) => {
+      const start = t; t += s.m;
+      const whos = s.who[plan].map(w => `<span class="w ${w}">${esc(w === 'p1' || w === 'p2' ? pName(w) : WHO[w])}</span>`).join('');
+      return `<li class="${s.opt ? 'opt' : ''}"><div class="t">${start}분${s.m ? '' : '~'}</div><div class="body"><span class="n">${i + 1}</span>
+        <h4>${esc(s.name)}<span class="dur">${s.opt ? '선택 · ' : ''}${s.m ? s.m + '분' : ''}</span></h4>
+        ${s.d ? `<p>${esc(s.d)}</p>` : ''}<div class="whos">${whos}</div></div></li>`;
+    }).join('');
+    for (const p of ['p1', 'p2']) {
+      $(`#${p}name`).textContent = pName(p);
+      $(`#${p}list`).textContent = STEPS.filter(s => s.role && s.who[plan].includes(p)).map(s => s.role).join(', ');
+    }
+  }
+  $$('[data-plan]').forEach(b => b.addEventListener('click', () => { plan = b.dataset.plan; renderWorship(); }));
+  $('#swap').addEventListener('click', () => { swapped = !swapped; renderWorship(); });
+  renderWorship();
+
+  /* ---------- budget ---------- */
+  const FOOD = { han: { r: [5.5, 10], note: '한정식·뷔페·케이터링 1인 5.5만~10만' }, hotel: { r: [18.5, 35], note: '호텔 코스 1인 18.5만~35만' } };
+  const FLOWER = { basic: { r: [20, 60], note: '장소 기본 20만, 테이블 세팅 56만' }, pack: { r: [190, 190], note: '터치더스카이처럼 필수인 곳' } };
+  const FIXED = [
+    ['대관', [0, 50], '식당은 대부분 없음, 터치더스카이 50만'],
+    ['스냅', [24, 125], '장소 연계, 아이폰 스냅, 전문 작가'],
+    ['신랑신부 의상', [10, 40], '대여와 기성복 기준'],
+    ['헤어메이크업 2인', [15, 25], '신부 10만 + 신랑 5만 정도부터'],
+    ['소품, 인쇄', [5, 15], '이름표, 배치표, 순서지, 덕담카드'],
+  ];
+  const SCALE = 850;
+  let venue = 'han', flower = 'basic';
+  const round10 = n => Math.round(n / 10) * 10;
+  function renderBudget() {
+    const n = +$('#guests').value;
+    $('#guestsOut').textContent = n + '명';
+    $$('[data-venue]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.venue === venue)));
+    $$('[data-flower]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.flower === flower)));
+    const f = FOOD[venue], fl = FLOWER[flower];
+    const rows = [['식사', [f.r[0] * n, f.r[1] * n], `${f.note} × ${n}명`], FIXED[0], ['꽃', fl.r, fl.note], ...FIXED.slice(1)];
+    let lo = 0, hi = 0;
+    $('#brows').innerHTML = rows.map(([k, r, note]) => {
+      lo += r[0]; hi += r[1];
+      const v = r[0] === r[1] ? `${won(r[0])}만` : `${won(r[0])}만~${won(r[1])}만`;
+      return `<div class="brow"><div class="nm">${esc(k)}<small>${esc(note)}</small></div><div class="val">${v}</div>
+        <div class="bar"><span class="hi" style="width:${Math.min(100, r[1] / SCALE * 100)}%"></span><span class="lo" style="width:${Math.min(100, r[0] / SCALE * 100)}%"></span></div></div>`;
+    }).join('') + '<div class="brow"><div class="nm">목사님 감사 인사<small>양가와 상의</small></div><div class="val">별도</div></div>';
+    $('#total').textContent = `약 ${won(round10(lo))}만~${won(round10(hi))}만원`;
+    $('#per').textContent = `${n}명 기준, 1인당 약 ${won(lo / n)}만~${won(hi / n)}만원`;
+  }
+  $$('[data-venue]').forEach(b => b.addEventListener('click', () => { venue = b.dataset.venue; renderBudget(); }));
+  $$('[data-flower]').forEach(b => b.addEventListener('click', () => { flower = b.dataset.flower; renderBudget(); }));
+  $('#guests').addEventListener('input', renderBudget);
+  renderBudget();
+
+  const CASES = [
+    { name: '로움한정식', g: 24, t: 240, src: 'cheomjee', hl: true },
+    { name: '연인의정원 분당', g: 10, t: 377, src: 'yje' },
+    { name: '이에나 안국', g: 12, t: 492, src: 'vivi' },
+    { name: '터치더스카이', g: 9, t: 532, src: 'midori', est: '제 추정' },
+    { name: '워커힐 금룡', g: 14, t: 627, src: 'xuang', est: '작성자 추정' },
+  ];
+  $('#cases').innerHTML = CASES.map(c => `<div class="brow${c.hl ? ' hl' : ''}">
+      <div class="nm">${esc(c.name)}${c.est ? `<span class="est">${c.est}</span>` : ''}<small>${c.g}명 · ${esc(SRC[c.src])}</small></div>
+      <div class="val">${won(c.t)}만<small>1인 ${won(c.t / c.g)}만</small></div>
+      <div class="bar"><span class="lo" style="width:${c.t / 650 * 100}%"></span></div></div>`).join('');
+
+  /* ---------- sheets content ---------- */
+  const CATS = { all: '전체', place: '장소·식사', worship: '예배·진행', photo: '사진·꽃', look: '의상·뷰티', notice: '알림·준비물' };
+  const TIPS = [
+    { cat: 'place', name: '장소', opts: ['웨딩 레스토랑', '호텔 룸', '돌잔치 공간', '한정식 단독룸', '대관 공간 + 출장 케이터링'], tip: '20명 단독 공간에 예배까지 3~4시간 대관. 반주와 가사 스크린이 되는지 확인하고, 스냅·드레스·메이크업까지 연결해 주는 곳이면 준비가 크게 줄어요.', src: ['gomjubu'] },
+    { cat: 'place', name: '식사', opts: ['호텔 코스 1인 18.5만~30만', '돌잔치 공간 뷔페', '한정식 24명 130만', '출장 케이터링 1인 10만'], tip: '인원보다 2명분 더 주문하세요. 못 드시는 음식과 아기 의자는 미리 알리고, 시식이 되면 맛보세요.', src: ['giyu', 'gomjubu'] },
+    { cat: 'worship', name: '진행', opts: ['신랑 사회', '신랑신부 셀프 대본', '친구 사회 (사례비 20만)', '지배인 도움'], tip: '예배 인도는 목사님께, 예배 전후 사회는 신랑신부나 가족에게 맡기세요.' },
+    { cat: 'worship', name: '순서지와 서약', opts: ['혼인서약서 직접 작성', '성혼선언문 가족 낭독', '2단 접지 순서지'], tip: '찬송 가사와 성경 본문까지 넣으세요. 장소에 메일로 보내면 출력해 주는 곳도 있어요.', src: ['midori'] },
+    { cat: 'look', name: '의상', opts: ['중고 드레스 4만', '흰 원피스 5.8만', '드레스·베일·구두 28.7만', '흰 투피스 정장', '신랑 정장 대여 5.5만', '신랑 정장 구입 11.5만'], tip: '식사 때 입을 2부 복장을 준비하세요. 어머니들은 한복 대신 사복도 괜찮고, 양가 색을 맞추면 사진이 예뻐요.' },
+    { cat: 'look', name: '헤어메이크업', opts: ['일반 메이크업 2인', '호텔 객실 출장', '신부 10만 + 신랑 5만', '2인 21.5만'], tip: '미리 테스트해 보고, 식이 끝난 뒤 미용실 머리 감기를 예약해 두세요.', src: ['vivi'] },
+    { cat: 'look', name: '반지', opts: ['종로 14k 90만', '나무 반지 4만', '웨딩밴드만'], tip: '주문부터 받기까지 약 1개월 걸려요.' },
+    { cat: 'photo', name: '사진', opts: ['장소 연계 스냅', '아이폰 스냅', '스냅 24만~125만', '친구에게 부탁 (사례비 20만)'], tip: '가족 조합별 단체사진 목록을 미리 만들고, 예배 중 촬영 위치는 목사님과 상의하세요. 촬영 시간에는 상한을 두세요.' },
+    { cat: 'photo', name: '꽃', opts: ['장소 기본 20만', '테이블 세팅 56만', '필수 패키지 190만', '전체 생화 440만'], tip: '셀프 생화는 비추천이에요. 끝나고 꽃을 포장해 가족에게 드리면 반응이 좋았어요.', src: ['chomoong'] },
+    { cat: 'photo', name: '웨딩촬영', opt: true, opts: ['생략', '셀프 사진관', '토탈샵'], tip: '본식 스냅이 식 전에 많이 찍어 주면 생략해도 돼요. 스냅이 스튜디오보다 3배가량 저렴했다는 후기도 있어요.', src: ['midori'] },
+    { cat: 'notice', name: '알림장', opts: ['카톡 프로필', '셀프 청첩장', '모바일 알림장 (우리다운)', 'Q&A 알림장'], tip: '축의금과 화환은 사양한다고 적으세요. 회사 경조금 증빙용 청첩장이 필요할 수 있어요.', src: ['xuang'] },
+    { cat: 'notice', name: '소품', opts: ['이름표', '배치표', '웰컴보드', '슬리퍼', '덕담카드', '2.5만~15만'], tip: '배치표와 이름표는 장소에 메일로 보내면 준비해 주는 곳이 있어요. 덕담카드는 예배가 끝난 뒤 식사 시간에 돌리세요.', src: ['midori'] },
+    { cat: 'notice', name: '헬퍼', opts: ['헬퍼 이모님', '도울 가족 한 명'], tip: '헬퍼 없이 했다가 어머니 한복을 신부가 입혀 드리고 립 수정도 못 한 사례가 있어요. 꼭 한 명은 정하세요.', src: ['ulming'] },
+  ];
+  const tipCard = t => `<article class="card tip" data-cat="${t.cat}">
+      <div class="th"><h4>${esc(t.name)}${t.opt ? ' <span class="cat">(선택)</span>' : ''}</h4><span class="cat">${esc(CATS[t.cat])}</span></div>
+      <span class="k">후기 속 선택지</span>
+      <ul class="tags">${t.opts.map(o => `<li class="tag">${esc(o)}</li>`).join('')}</ul>
+      <div class="ours"><b>우리 팁</b>${esc(t.tip)}</div>${srcs(t.src)}</article>`;
+
+  const CAUT_GROUPS = { before: '장소 계약 전', during: '준비하면서', day: '당일' };
+  const CAUTIONS = [
+    { g: 'before', t: '예배를 연계 사회자에게 맡기지 않기', d: '30분에 맞춰 예배 순서를 줄여야 했어요.', src: ['giyu'] },
+    { g: 'before', t: '장소는 양가가 함께 정하기', d: '시댁과 상의 없이 정했다가 마음이 편치 않았다고 해요. 양가 중간 지점을 고른 사례도 있어요.', src: ['giyu', 'yje'] },
+    { g: 'before', t: '예약 오픈일과 최소 결제액 확인', d: '더 마고 그릴은 3개월 전 오전 10시 전화 예약에 평일 250만·주말 300만원, 롯데 무궁화는 3개월 전 오후 3시 이후 전화에 10명부터, 아폴로룸은 보증 15명부터예요.', src: ['chomoong', 'midori'] },
+    { g: 'before', t: '필수 업체와 현장 추가 요금 묻기', d: '터치더스카이는 꽃과 스냅을 지정 업체에서만 할 수 있었고 꽃만 190만원이었어요. 곰주부는 신부 메이크업 추가 10만원, 혼주 메이크업, 음료 추가를 따로 냈어요.', src: ['midori', 'gomjubu'] },
+    { g: 'before', t: '인원을 늘리지 않기', d: '130명으로 타협한 사례는 명단 갈등에 시달렸고, 80명 사례는 웨딩홀과 비용 차이가 크지 않았어요.', src: ['ulming', 'koreapas'] },
+    { g: 'before', t: '주차와 날씨 확인', d: '야외는 날씨와 교통 때문에 포기한 사례가 있고, 주차비가 따로 나온 곳도 있어요(3대 28,500원).', src: ['ulming', 'vivi'] },
+    { g: 'during', t: '꽃 셀프 장식 피하기', d: '흰 생화는 끝이 갈변하고 뭉개져요.', q: '결혼식에 도박하지 마세요.', src: ['chomoong'] },
+    { g: 'during', t: '메이크업 미리 테스트', d: '할인 상품 결과가 아쉬웠던 사례가 있고, 웨딩촬영 때 같은 샵을 써 보고 피드백한 사례가 있어요.', src: ['xuang', 'vivi'] },
+    { g: 'during', t: '헬퍼 없이 하지 않기', d: '어머니 한복을 신부가 입혀 드리고 립 수정도 못 했어요.', q: '돈 아끼려다 평생 가는 사진을 망칠 수 있다.', src: ['ulming'] },
+    { g: 'day', t: '스냅 촬영 시간에 상한 두기', d: '촬영이 길어져 식사가 늦어졌어요. 가족사진도 조합별로 따로 찍어서 오래 걸려요.', src: ['chomoong', 'ulming'] },
+    { g: 'day', t: '할인권과 서류는 전날 챙기기', d: '호텔 할인권을 두고 가서 강북과 강남을 오가며 3시간을 썼어요.', src: ['xuang'] },
+    { g: 'day', t: '당일 운영을 신랑신부가 맡지 않기', d: '전부 직접 기획한 사례는 체크리스트가 수백 개였어요.', q: '비전문가 둘이 하면 싸움이 난다.', src: ['koreapas'] },
+  ];
+  const cautCard = c => `<div class="card caut"><b>${esc(c.t)}</b><p>${esc(c.d)}</p>${c.q ? `<q>${esc(c.q)}</q>` : ''}${srcs(c.src)}</div>`;
+  const cautHtml = groups => groups.map(g => {
+    const list = CAUTIONS.filter(c => c.g === g);
+    return `<h3 class="grp">${CAUT_GROUPS[g]}<span>${list.length}</span></h3>${list.map(cautCard).join('')}`;
+  }).join('');
+
+  const PROS = [
+    ['가족과 밀도 있는 시간', '한 명 한 명과 인사하고 신랑신부도 함께 식사해요. 가족이 일하는 혼주가 아니라 초대받은 손님이 돼요.', ['vivi', 'midori', 'xuang']],
+    ['시간에 쫓기지 않음', '웨딩홀의 1시간 회전 대신 3~4시간을 빌려 가족사진을 여유 있게 찍었어요.', ['vivi', 'midori']],
+    ['식순과 형식이 자유로움', '화촉점화를 빼거나 부모님 인사를 앞으로 당기고, 전통혼례나 예배로 바꿀 수 있어요.', ['ulming', 'xuang', 'giyu']],
+    ['짧은 준비 기간', '1년 전 예약 전쟁이 없어요. 1~3개월 만에 준비한 사례가 많아요.', ['cheomjee', 'xuang', 'chomoong']],
+    ['적은 비용', '9~24명 규모는 반지와 웨딩촬영을 빼고 240만~630만원이었어요.', []],
+    ['축의금과 하객 응대 부담이 없음', '축의금과 화환을 사양하면 주고받을 빚도 남지 않아요.', ['chomoong', 'xuang']],
+    ['부모님 만족도도 높음', '처음엔 불안해하던 부모님이 끝나고는 "너무 좋았던 결혼식"이라고 하신 사례가 여럿이에요.', ['midori', 'giyu', 'koreapas']],
+  ];
+  const CONS = [
+    ['부모님 설득', '반대로 많이 다투고, 양가 지원을 받지 않는 조건으로 승낙받은 사례가 있어요. 괜찮다던 부모님도 명단을 줄일 때 스트레스를 받으셨어요.', '장소와 명단을 양가 부모님과 함께 정하기', ['yje', 'ulming']],
+    ['친척의 서운함', '친척까지 부르면 50명 가까이 돼요. "직계가족만이 아니면 차라리 웨딩홀"을 설득 기준으로 쓴 사례가 있어요.', '직계가족의 범위를 양가가 같은 기준으로 정하기', ['chomoong']],
+    ['끊임없는 설명', '"150번쯤 말할 각오", "재혼인 줄 알겠다" 같은 반응을 겪었어요.', '알림장에 이유와 축의금 사양을 짧게 적기', ['vivi', 'xuang']],
+    ['직접 챙길 게 많음', '테이블 세팅, 사진, 사회를 따로 구해야 해요. "스몰이라도 준비할 게 꽤 많다"는 말이 반복돼요.', '스냅, 드레스, 메이크업까지 연결해 주는 장소 고르기', ['cheomjee', 'chomoong', 'gomjubu']],
+    ['생각보다 싸지 않을 수 있음', '호텔 룸은 1인 식대가 18.5만~30만원이고, 꽃 패키지가 필수인 곳도 있어요. "결혼식 이름만 붙으면 1.5배"라는 말도 있었어요.', '계약 전에 필수 업체, 최소 결제액, 추가 요금 묻기', ['midori', 'koreapas', 'gomjubu']],
+    ['친구와의 사진이 없음', '친한 친구들과 당일 사진을 못 찍은 게 가장 아쉬웠다고 해요.', '친구들과는 따로 식사 자리나 사진 시간을 잡기', ['chomoong']],
+    ['본식 사진의 한계', '레스토랑은 단상과 핀조명이 없고 좁아서, 배경보다 인물 위주로 남아요.', '가족 인물 사진 위주로 기대치를 맞추기', ['ulming']],
+  ];
+
+  const REVIEWS = [
+    { id: 'midori', who: '쀼또리 (midori_p)', url: 'https://blog.naver.com/midori_p/223466104421', g: 9, pl: '63빌딩 터치더스카이 아폴로룸', fm: '일반식, 지배인이 진행 도움 · 2023년 11월' },
+    { id: 'yje', who: 'yje1019', url: 'https://blog.naver.com/yje1019/223666617659', g: 10, pl: '연인의정원 분당 · 웨딩 레스토랑', fm: '일반식, 신랑이 사회, 약 20분' },
+    { id: 'vivi', who: 'viviolaa', url: 'https://blog.naver.com/viviolaa/224279899139', g: 12, pl: '이에나 안국 · 한옥 꽃집 대관 + 케이터링', fm: '친구가 사회, 4시간 대관, 성혼선언문 가족 낭독' },
+    { id: 'chomoong', who: 'chomoong_319', url: 'https://blog.naver.com/chomoong_319/224449293886', g: 12, pl: 'JW 메리어트 더 마고 그릴 룸', fm: '셀프 진행, 평일 점심, 식대 1인 30만원' },
+    { id: 'xuang', who: '슈앙 (브런치 2편)', url: 'https://brunch.co.kr/@xuang/18', url2: 'https://brunch.co.kr/@xuang/27', g: 14, pl: '워커힐 중식당 금룡 룸', fm: '전통혼례 간소화 약 6분, Q&A 알림장 · 2023년' },
+    { id: 'giyu', who: 'onlygiyu', url: 'https://blog.naver.com/onlygiyu/224444922910', g: 20, about: true, pl: '미사의정원 하남 · 돌잔치 공간', fm: '예배식, 목사님 주례 · 우리와 가장 비슷한 사례', best: true },
+    { id: 'cheomjee', who: 'cheomjee', url: 'https://blog.naver.com/cheomjee/224191414219', g: 24, about: true, pl: '로움한정식 용인 · 한정식집 단독룸', fm: '셀프 진행, 준비 기간 1개월' },
+    { id: 'gomjubu', who: '곰주부 (gomjubu)', url: 'https://gomjubu.tistory.com/7', g: 50, pl: '카페 대관 · 장소 연계 업체로 스드메', fm: '사회자 10만원, 스드메까지 함께 하는 방식 추천 · 2021년' },
+    { id: 'koreapas', who: '고파스 펌글', url: 'https://www.koreapas.com/m/view.php?id=gofun&no=405989', g: 80, pl: '펍 대관 웨딩파티', fm: '신랑이 직접 기획, "직접 기획은 난도가 높다"' },
+    { id: 'ulming', who: 'dailyulming', url: 'https://blog.naver.com/dailyulming/224253414135', g: 130, pl: '마리앤코 영등포 · 레스토랑 웨딩', fm: '디렉팅 업체, 하객 명단 갈등, 헬퍼 필수' },
+  ];
+  const revCard = r => `<article class="card rev${r.best ? ' best' : ''}">
+      <div class="top"><span class="who">${esc(r.who)}</span><span class="g">${r.about ? '약 ' : ''}${r.g}<small>명</small></span></div>
+      ${r.g <= 30 ? `<div class="gbar"><i style="width:${r.g / 30 * 100}%"></i><u></u></div>` : ''}
+      <div class="pl">${esc(r.pl)}</div><div class="fm">${esc(r.fm)}</div>
+      <div class="chips"><a class="btn btn-sm" href="${r.url}" target="_blank" rel="noopener">${r.url2 ? '1편' : '원문'} 보기</a>${r.url2 ? `<a class="btn btn-sm" href="${r.url2}" target="_blank" rel="noopener">상세편 보기</a>` : ''}</div></article>`;
+
+  const SHEETS = {
+    tips: () => ({ title: '항목별로 고를 것', html: `<p class="hint">웨딩홀 패키지가 없으니 하나씩 직접 정해야 해요. 장소와 식사를 먼저 정하면 나머지는 대부분 따라와요.</p>
+      <div class="chips" id="tipFilter">${Object.entries(CATS).map(([k, v]) => `<button type="button" class="chip" data-cat="${k}" aria-pressed="${k === 'all'}">${esc(v)}</button>`).join('')}</div>
+      ${TIPS.map(tipCard).join('')}`, after: body => {
+        $$('#tipFilter .chip', body).forEach(b => b.addEventListener('click', () => {
+          $$('#tipFilter .chip', body).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+          $$('.tip', body).forEach(el => { el.hidden = b.dataset.cat !== 'all' && el.dataset.cat !== b.dataset.cat; });
+        }));
+      } }),
+    cautions: () => ({ title: '후기 속 실수에서 배우기', html: `<p class="hint">실수는 대부분 "미리 확인하지 않아서"였어요.</p>${cautHtml(['before', 'during', 'day'])}` }),
+    pc: () => ({ title: '좋았던 점과 힘들었던 점', html: `<p class="hint">가장 힘든 건 돈이 아니라 사람이었어요. 그래도 끝나고는 "가족에게 집중할 수 있었다"는 말이 가장 많았어요.</p>
+      <h3 class="grp">좋았던 점<span>${PROS.length}</span></h3>
+      ${PROS.map(([t, d, s]) => `<div class="card pc-item good"><b>${esc(t)}</b><p>${esc(d)}</p>${srcs(s)}</div>`).join('')}
+      <h3 class="grp">힘들었던 점과 우리 대비<span>${CONS.length}</span></h3>
+      ${CONS.map(([t, d, f, s]) => `<div class="card pc-item bad"><b>${esc(t)}</b><p>${esc(d)}</p><div class="fix"><i>대비</i>${esc(f)}</div>${srcs(s)}</div>`).join('')}` }),
+    sources: () => ({ title: '참고한 후기 10건', html: `<p class="hint">링크 11개를 모두 읽었고, 같은 작성자의 브런치 두 편은 하나로 묶었어요. 막대의 세로선이 우리 인원(20명)이에요.</p>
+      <h3 class="grp">우리와 비슷한 규모<span>9~24명</span></h3>${REVIEWS.filter(r => r.g <= 30).map(revCard).join('')}
+      <h3 class="grp">"스몰"의 범위를 보여 주는 비교군<span>50~130명</span></h3>${REVIEWS.filter(r => r.g > 30).map(revCard).join('')}
+      <p class="fine">이미지로만 올라온 비용표(yje1019, onlygiyu)는 읽을 수 없어서 반영하지 못했어요.</p>` }),
+    install: () => STANDALONE ? ({ title: '폰 홈 화면에 추가하기', html: `<p class="lede">이 주소를 휴대폰에서 열고 아래처럼 추가하면, 주소창 없이 앱처럼 열려요. 로그인은 필요 없어요.</p>
+      <div class="card tip"><h4>아이폰</h4><ol class="steps"><li>Safari에서 이 주소를 열어요.</li><li>아래쪽 공유 버튼을 눌러요.</li><li>"홈 화면에 추가"를 누르고 저장해요.</li></ol></div>
+      <div class="card tip"><h4>안드로이드</h4><ol class="steps"><li>Chrome에서 이 주소를 열어요.</li><li>오른쪽 위 메뉴(점 세 개)를 눌러요.</li><li>"앱 설치" 또는 "홈 화면에 추가"를 눌러요.</li></ol></div>
+      <p class="fine">한 번 열어 두면 인터넷이 없어도 열려요. 체크한 준비 항목은 그 폰에만 저장돼요.</p>` }) : ({ title: '폰 홈 화면에 추가하기', html: `<p class="lede">이 페이지 주소를 휴대폰 브라우저에서 열고 claude.ai에 로그인한 뒤 아래처럼 추가하면, 다른 앱처럼 아이콘을 눌러 바로 열 수 있어요.</p>
+      <div class="card tip"><h4>아이폰</h4><ol class="steps"><li>Safari에서 이 페이지를 열어요.</li><li>아래쪽 공유 버튼을 눌러요.</li><li>"홈 화면에 추가"를 고르고 이름을 "스몰웨딩"으로 저장해요.</li></ol></div>
+      <div class="card tip"><h4>안드로이드</h4><ol class="steps"><li>Chrome에서 이 페이지를 열어요.</li><li>오른쪽 위 메뉴(점 세 개)를 눌러요.</li><li>"홈 화면에 추가"를 고르고 저장해요.</li></ol></div>
+      <p class="fine">Claude 앱에서는 사이드바의 고정된 항목에서도 바로 열 수 있어요. 체크한 준비 항목은 어디서 열든 같이 보여요.</p>` }),
+    tip: name => { const t = TIPS.find(x => x.name === name); return { title: `${name} 팁`, html: tipCard(t) }; },
+    caut: g => ({ title: `${CAUT_GROUPS[g]} 조심할 것`, html: cautHtml([g]) }),
+  };
+
+  let lastFocus = null;
+  function openSheet(key, arg) {
+    const s = SHEETS[key](arg);
+    $('#sheetTitle').textContent = s.title;
+    const body = $('#sheetBody');
+    body.innerHTML = s.html; body.scrollTop = 0;
+    if (s.after) s.after(body);
+    lastFocus = document.activeElement;
+    $('#sheetBg').hidden = false;
+    document.body.style.overflow = 'hidden';
+    $('#sheet').focus();
+  }
+  function closeSheet() {
+    $('#sheetBg').hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  $('#sheetClose').addEventListener('click', closeSheet);
+  $('#sheetBg').addEventListener('click', e => { if (e.target === e.currentTarget) closeSheet(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#sheetBg').hidden) closeSheet(); });
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-sheet]');
+    if (b) openSheet(b.dataset.sheet, b.dataset.arg);
+  });
+
+  /* ---------- plan + checklist ---------- */
+  const PHASES = [
+    { id: 'decide', when: 'D-6~4개월', name: '결정하기', lead: '날짜, 지역, 예산이 정해져야 장소를 고를 수 있어요.', items: [
+      ['date', '날짜와 시간대 정하기', '주말 또는 평일, 점심 또는 저녁'],
+      ['region', '지역 정하기', '양가 가족이 오가기 쉬운 중간 지점'],
+      ['budget', '총예산과 양가 분담 방식 정하기', '', { go: 'budget', label: '예산' }],
+      ['guests', '최종 명단 정하기', '직계가족 범위, 아이 수'],
+      ['pastors', '목사님 두 분 일정 확인과 역할 분담', '예배 순서의 A 또는 B', { go: 'worship', label: '예배' }],
+    ] },
+    { id: 'venue', when: 'D-4~3개월', name: '장소 고르기', lead: '단독 공간 3~4곳을 상담해 보세요.', caut: 'before', items: [
+      ['ask', '후보 3~4곳 문의하기', '수용 인원, 대관 시간, 반주와 스크린, 필수 업체, 최소 결제액, 주차', { go: 'venue', label: '장소' }],
+      ['tell', '예배 시간(약 50분)을 장소에 미리 알리기'],
+      ['together', '양가 부모님과 장소 함께 정하기'],
+      ['open', '호텔 룸이면 예약 오픈일 확인하기', '후기 속 호텔은 3개월 전 전화 예약'],
+    ] },
+    { id: 'gate', gate: true, name: '장소 계약', lead: '여기서 날짜가 확정되고 업체 예약이 시작돼요.', items: [['contract', '장소 계약']] },
+    { id: 'vendors', when: 'D-3~1개월', name: '업체 예약', caut: 'during', items: [
+      ['snap', '스냅 작가 예약', '가족사진 조합 목록도 함께', { tip: '사진' }],
+      ['ring', '반지 주문', '받기까지 약 1개월', { tip: '반지' }],
+      ['dress', '의상 정하기', '신랑, 신부, 부모님 색 맞추기, 2부 복장', { tip: '의상' }],
+      ['makeup', '헤어메이크업 예약', '식 후 머리 감기 예약까지', { tip: '헤어메이크업' }],
+      ['flower', '꽃 정하기', '장소 기본 또는 업체', { tip: '꽃' }],
+    ] },
+    { id: 'polish', when: 'D-1개월~1주', name: '알리고 다듬기', items: [
+      ['notice', '알림장 보내기', '축의금과 화환은 사양한다고 적기', { tip: '알림장' }],
+      ['order', '예배 순서지 만들기', '찬송, 본문, 혼인서약, 성혼선언문', { tip: '순서지와 서약' }],
+      ['helper', '헬퍼 이모님 또는 도울 가족 정하기', '', { tip: '헬퍼' }],
+      ['seats', '자리 배치표와 이름표를 장소에 메일로 보내기', '', { tip: '소품' }],
+      ['diet', '못 드시는 음식, 아기 의자 최종 확인', '', { tip: '식사' }],
+    ] },
+    { id: 'day', when: 'D-1~당일', name: '전날과 당일', caut: 'day', flow: ['메이크업', '가족사진', '예배', '식사', '머리 감기'], items: [
+      ['pack', '전날 짐 점검', '반지, 순서지, 서약서, 할인권, 드레스 다림질'],
+      ['share', '당일 타임테이블 공유', '헬퍼, 스냅 작가, 목사님과', { tip: '진행' }],
+      ['thanks', '식 후 사진과 감사 메시지 보내기'],
+    ] },
+  ];
+  const ALL = PHASES.flatMap(p => p.items.map(it => ({ id: it[0], title: it[1], sub: it[2], phase: p })));
+  let num = 0;
+  $('#phases').innerHTML = PHASES.map(p => {
+    if (p.gate) {
+      const [id, title] = p.items[0];
+      return `<div class="gate" data-phase="${p.id}"><span class="dia"></span><div><label><input type="checkbox" data-id="${id}">${esc(title)}</label><span>${esc(p.lead)}</span></div></div>`;
+    }
+    num += 1;
+    const flow = p.flow ? `<div class="flow">${p.flow.map(x => `<span class="${x === '예배' ? 'k' : ''}">${esc(x)}</span>`).join('<i>›</i>')}</div>` : '';
+    const act = a => !a ? '' : a.go
+      ? `<a class="btn btn-sm btn-ghost" href="#${a.go}">${esc(a.label)} ${'›'}</a>`
+      : `<button type="button" class="btn btn-sm btn-ghost" data-sheet="tip" data-arg="${esc(a.tip)}">팁</button>`;
+    const n = p.caut ? CAUTIONS.filter(c => c.g === p.caut).length : 0;
+    return `<article class="card phase" data-phase="${p.id}">
+      <div class="phase-head"><span class="rank">${num}</span><div><h3>${esc(p.name)}</h3><span class="when">${esc(p.when)}</span></div><span class="c" data-count="${p.id}"></span></div>
+      ${p.lead ? `<p class="lead">${esc(p.lead)}</p>` : ''}${flow}
+      <ul class="checks">${p.items.map(([id, t, s, a]) => `<li><label><input type="checkbox" data-id="${id}"><span class="tx">${esc(t)}${s ? `<small>${esc(s)}</small>` : ''}</span></label>${act(a)}</li>`).join('')}</ul>
+      ${p.caut ? `<div class="phase-foot"><button type="button" class="btn btn-sm btn-ghost warnbtn" data-sheet="caut" data-arg="${p.caut}">이때 조심할 것 ${n}</button></div>` : ''}
+    </article>`;
+  }).join('');
+
+  const LS_KEY = 'wedding-guide:done';
+  let done = {};
+  try { done = JSON.parse(localStorage.getItem(LS_KEY) || '{}') || {}; } catch (e) { done = {}; }
+  const saveLocal = () => { try { localStorage.setItem(LS_KEY, JSON.stringify(done)); } catch (e) {} };
+  const setSync = msg => { $('#sync').textContent = msg; };
+  const SHARED = '체크한 항목이 저장되고, 이 페이지를 함께 보는 사람에게도 보여요.';
+  const LOCAL = '체크한 항목은 이 브라우저에만 저장돼요.';
+
+  function paint() {
+    $$('input[data-id]').forEach(b => { b.checked = !!done[b.dataset.id]; });
+    const n = ALL.filter(x => done[x.id]).length;
+    $('#pcount').innerHTML = `${n}<small> / ${ALL.length} 완료</small>`;
+    $('#pbar').style.width = `${n / ALL.length * 100}%`;
+    $('#meta').innerHTML = `준비 <b class="num">${n}/${ALL.length}</b>`;
+    const firstOpen = ALL.find(x => !done[x.id]);
+    for (const p of PHASES) {
+      const k = p.items.filter(([id]) => done[id]).length;
+      const el = $(`[data-phase="${p.id}"]`);
+      el.classList.toggle('done', k === p.items.length);
+      el.classList.toggle('now', !!firstOpen && firstOpen.phase === p);
+      const c = $(`[data-count="${p.id}"]`);
+      if (c) c.textContent = k === p.items.length ? '완료' : `${k}/${p.items.length}`;
+    }
+    $('#pnext').textContent = firstOpen ? `다음: ${firstOpen.title}` : '모두 끝났어요';
+    $('#nextWhat').innerHTML = firstOpen
+      ? `${esc(firstOpen.phase.name)} · ${esc(firstOpen.title)}${firstOpen.sub ? `<small>${esc(firstOpen.sub)}</small>` : ''}`
+      : '모두 끝났어요<small>결혼 축하해요</small>';
+    $('#nextDone').hidden = !firstOpen;
+    $('#nextDone').dataset.id = firstOpen ? firstOpen.id : '';
+  }
+
+  let ref = null, remoteExists = false, chain = Promise.resolve();
+  function setDone(id, v) {
+    done = { ...done, [id]: v };
+    saveLocal(); paint();
+    if (!ref) return;
+    chain = chain
+      .then(() => remoteExists ? ref.update({ done: { [id]: v } }) : ref.set({ done }))
+      .then(() => { remoteExists = true; setSync(SHARED); })
+      .catch(() => setSync('체크를 저장하지 못했어요. 볼 수만 있는 권한이라면 이 브라우저에만 남아요.'));
+  }
+  $$('input[data-id]').forEach(b => b.addEventListener('change', () => setDone(b.dataset.id, b.checked)));
+  $('#nextDone').addEventListener('click', () => {
+    const id = $('#nextDone').dataset.id;
+    const item = ALL.find(x => x.id === id);
+    if (!item) return;
+    setDone(id, true);
+    toast(`"${item.title}" 완료로 체크했어요`);
+  });
+  paint();
+
+  (async () => {
+    let db = null;
+    try { db = window.claude && window.claude.use ? await window.claude.use('db') : null; } catch (e) { db = null; }
+    if (!db) { setSync(LOCAL); return; }
+    try { ref = db.doc('progress/checklist'); } catch (e) { ref = null; setSync(LOCAL); return; }
+    ref.onSnapshot(snap => {
+      remoteExists = snap.exists;
+      if (snap.exists) {
+        const d = snap.data() || {};
+        done = { ...(d.done || {}) };
+        saveLocal(); paint();
+      }
+      setSync(SHARED);
+    }, () => { ref = null; setSync(LOCAL); });
+  })();
+})();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(() => {}); });
+}
+</script>
+</body>
+</html>
