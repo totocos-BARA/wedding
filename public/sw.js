@@ -1,6 +1,6 @@
 // Keeps the app usable offline. Pages are network-first so updates show up
 // on the next open; icons and fonts are cache-first.
-const CACHE = 'wedding-v1';
+const CACHE = 'wedding-v2';
 const PRECACHE = ['/', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/apple-touch-icon.png'];
 
 self.addEventListener('install', event => {

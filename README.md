@@ -1,6 +1,6 @@
 # 우리 스몰웨딩 가이드
 
-가족만 모여 드리는 스무 명의 예배를 준비하는 앱이에요. 스몰웨딩 후기 11편을 정리했어요.
+가족만 모여 드리는 작은 예배를 준비하는 앱이에요. 스몰웨딩 후기 11편을 정리했고, 인원·예식일·지역·예산을 넣으면 맞는 장소와 예상 총액, 날짜별 할 일을 골라 줘요.
 
 - 웹 주소: https://wedding.totocos.workers.dev (Cloudflare Workers)
 - claude.ai 버전: https://claude.ai/artifact/SAbXKDmzDqcu48ZDZkxZ6A

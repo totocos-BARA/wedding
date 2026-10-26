@@ -15,10 +15,10 @@ HEAD = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="가족만 모여 드리는 스무 명의 예배. 스몰웨딩 후기 11편을 정리한 준비 앱.">
+<meta name="description" content="가족만 모여 드리는 작은 예배. 우리 조건을 넣으면 스몰웨딩 후기 11편에서 맞는 장소와 예산, 일정을 골라 주는 준비 앱.">
 <meta name="wedding-standalone" content="1">
 <meta name="theme-color" content="#FAF6F1" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#181215" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#161113" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
